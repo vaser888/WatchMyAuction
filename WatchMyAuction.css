@@ -1,3 +1,7 @@
-.body {
-  background-color: #333; 
+body {
+  font: 18px 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #37373a;
+    color: white;
 }

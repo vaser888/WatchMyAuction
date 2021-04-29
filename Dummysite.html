@@ -1,1 +1,102 @@
-adesa dummy site
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dummy site</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+</head>
+<div style="display: flex; flex-direction: row;">
+    <div class="yes" style="padding: 0px 15px ;">
+        <div class="lane-title-bar__name">Lane A - ADESA Ottowa</div>
+        <div class="vc-itemnum">#45</div>
+        <div class="bid-active bid-current">$45500</div>
+        <button onclick="plusone(this.parentElement)">add</button>
+        <button onclick="bids(this.parentElement)">bid</button>
+    </div>
+    <div class="yes" style="padding: 0px 15px ;">
+        <div class="lane-title-bar__name">Lane B - ADESA Ottowa</div>
+        <div class="vc-itemnum">#70</div>
+        <div class="bid-active bid-current">$23000</div>
+        <button onclick="plusone(this.parentElement)">add</button>
+        <button onclick="bids(this.parentElement)">bid</button>
+    </div>
+    <div class="yes" style="padding: 0px 15px ;">
+        <div class="lane-title-bar__name">Lane BB - ADESA Ottowa</div>
+        <div class="vc-itemnum">#82</div>
+        <div class="bid-active bid-current">$75250</div>
+        <button onclick="plusone(this.parentElement)">add</button>
+        <button onclick="bids(this.parentElement)">bid</button>
+    </div>
+</div>
+
+<script>
+    function plusone(test) {
+        var f = test.children[1].innerHTML;
+        var y = f;
+        y = parseInt(y.slice(1, y.lenght));
+        y += 1;
+        f = "#" + y;
+        test.children[1].innerHTML = f;
+    }
+  
+    function bids(test) {
+        var f = test.children[2].innerHTML;
+        var y = f;
+        y = parseInt(y.slice(1, y.lenght));
+        y += 1000;
+        f = "$" + y;
+        test.children[2].innerHTML = f;
+    }
+////////
+////  inject site
+////////
+    function callback(mutationList, observer) {
+        mutationList.forEach((mutation) => {
+            switch (mutation.type) {
+                case 'childList':
+                    //when you see something change do this=>
+                    let laneName = document.getElementsByClassName("lane-title-bar__name")
+                    let itemNum = document.getElementsByClassName("vc-itemnum");
+                    let currentBid = document.getElementsByClassName("bid-active bid-current");
+                    var passData = new Array;
+                    for(i=0; i<=itemNum.length-1; i++){
+                        var parsedLane = laneName[i].innerText.split(' ');
+                        var infoTitle = parsedLane[4] + " " + parsedLane[1];
+                        //console.log(parsedLane);
+                        var laneData = [infoTitle, itemNum[i].textContent, currentBid[i].textContent];
+                        passData.push(laneData);
+                    }
+                    console.log(passData);
+
+                    let getLaneTitle = document.getElementsByClassName("lane-title-bar__name");
+
+                    localStorage.setItem("adesa_data", JSON.stringify(passData));
+                    break;
+                case 'attributes':
+                    console.log("hi");
+                    break;
+            }
+        });
+    }
+
+    var p = "bid-active bid-current";
+
+    const observerOptions = {
+        childList: true,
+        attributes: true,
+        subtree: true
+    };
+
+    const observer = new MutationObserver(callback);
+
+    var checkLanes = document.getElementsByClassName("bid-active bid-current");
+    for(i=0; i <= checkLanes.length-1; i++) {
+        console.log(i);
+        var check = document.getElementsByClassName(p);
+        observer.observe(check[i], observerOptions);
+    }
+
+</script>

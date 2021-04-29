@@ -1,1 +1,39 @@
-set settings and genorate code to run
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch my Auction</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="WatchMyAuction.css">
+</head>
+
+<body>
+    <div id="main">
+        <div>
+            <select id="laneOption">
+                <option value="A">A</option>
+                <option value="AA">AA</option>
+                <option value="B">B</option>
+                <option value="BB">BB</option>
+                <option value="C">C</option>
+                <option value="CC">CC</option>
+                <option value="D">D</option>
+                <option value="DD">AA</option>
+                <option value="E">E</option>
+            </select>
+            <select id="locationOption">
+                <option value="ottowa">Ottowa</option>
+                <option value="toronto">Toronto</option>
+                <option value="montreal">Montreal</option>
+            </select>
+            <button onclick="makecolumn()">Add</button>
+        </div>
+        <div id="storagecontent"></div>
+        <div id="arraydata" style="white-space: pre;"></div>
+        <div id="dataDump"></div>
+    </div>
+</body>
+<script src="WatchMyAuction.js"></script>
