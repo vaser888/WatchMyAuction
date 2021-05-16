@@ -53,12 +53,20 @@
 ////////
 ////  inject site
 ////////
+
+let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
+
+newWin.document.write("Page Loaded");
+newWin.document.write("<div id='main'><div id='dataDump'></div></div>");
+newWin.document.write("<script src='https://vaser888.github.io/WatchMyAuction/WatchMyAuction.js'><\/script>");
+//https://vaser888.github.io/WatchMyAuction/WatchMyAuction.js
+//http://127.0.0.1:5500/WatchMyAuction.js
     function callback(mutationList, observer) {
         mutationList.forEach((mutation) => {
             switch (mutation.type) {
                 case 'childList':
                     //when you see something change do this=>
-                    let laneName = document.getElementsByClassName("lane-title-bar__name")
+                    let laneName = document.getElementsByClassName("lane-title-bar__name");
                     let itemNum = document.getElementsByClassName("vc-itemnum");
                     let currentBid = document.getElementsByClassName("bid-active bid-current");
                     var passData = new Array;
@@ -70,9 +78,7 @@
                         passData.push(laneData);
                     }
                     console.log(passData);
-
-                    let getLaneTitle = document.getElementsByClassName("lane-title-bar__name");
-
+                   
                     localStorage.setItem("adesa_data", JSON.stringify(passData));
                     break;
                 case 'attributes':
@@ -98,5 +104,4 @@
         var check = document.getElementsByClassName(p);
         observer.observe(check[i], observerOptions);
     }
-
 </script>
