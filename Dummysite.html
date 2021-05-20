@@ -55,7 +55,6 @@
 ////////
 
 let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
-
 newWin.document.write("Page Loaded");
 newWin.document.write("<div id='main'><div id='dataDump'></div></div>");
 newWin.document.write("<script src='https://vaser888.github.io/WatchMyAuction/WatchMyAuction.js'><\/script>");
@@ -97,6 +96,9 @@ newWin.document.write("<script src='https://vaser888.github.io/WatchMyAuction/Wa
     };
 
     const observer = new MutationObserver(callback);
+
+    observer.observe(document.getElementsByClassName("list-clean"), observerOptions);
+    //info-pane text-right
 
     var checkLanes = document.getElementsByClassName("bid-active bid-current");
     for(i=0; i <= checkLanes.length-1; i++) {
